@@ -579,7 +579,7 @@ fn put_result(
       result_map.insert(local_def_id, (item_info, result));
     }
   };
-  println!("put_result: result_map: {:#?}", result_map);
+  // println!("put_result: result_map: {:#?}", result_map);
 }
 
 fn hirs(tcx: TyCtxt) {
@@ -588,14 +588,16 @@ fn hirs(tcx: TyCtxt) {
   let hir = tcx.hir();
   let mut analysis_results: HashMap<LocalDefId, (ItemInfo, AnalysisResult)> =
     HashMap::new();
+
   for item_id in hir.items() {
     let item = hir.item(item_id);
     let name = item.ident.name;
     println!("name:{name}");
     handle_item(item, tcx, &mut analysis_results);
-
     println!("==========");
   }
+
+  println!("FINAL: result_map: {:#?}", analysis_results);
 }
 
 fn mirs(tcx: TyCtxt) {
