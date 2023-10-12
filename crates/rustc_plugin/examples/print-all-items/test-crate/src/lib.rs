@@ -24,6 +24,21 @@ fn bar_fn() {
   println!("size_of Bar is {}", mem::size_of::<Bar>());
 }
 
+// test for sturcts with impls
+trait MyTrait {
+  fn my_trait_fn(&self) -> i32;
+}
+
+struct MyFoo {
+  i: i32,
+}
+
+impl MyTrait for MyFoo {
+  fn my_trait_fn(&self) -> i32 {
+    self.i
+  }
+}
+
 #[cfg(test)]
 mod tests {
   use super::*;
